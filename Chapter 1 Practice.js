@@ -119,8 +119,7 @@ var palPermutation = function(s) {
     //assume no whitespace
     //if odd length, one letter can have one count
     //if even length, no letters can have just one count
-    var isEven = s.length % 2 === 0;
-    var hasOdd = false;
+    var countOdd = 0;
     var track = {};
     //map characters to table
     for(var i = 0; i < s.length; i++) {
@@ -128,14 +127,12 @@ var palPermutation = function(s) {
             track[s[i]] += 1;
         else
             track[s[i]] = 1;
+        if(track[s[i]] % 2 == 1)
+            countOdd++;
+        else
+            countOdd--;
     }
-    for (var k in track) {
-        if((isEven && track[k] % 2 === 1) || (track[k] % 2 == 1 && hasOdd))
-            return false;
-        else if (track[k] % 2 === 1)
-            hasOdd = true;
-    }
-    return true;
+    return countOdd < 2;
 };
 // console.log('palPermutation(tacocat) - ', palPermutation('tacocat'));
 // console.log('palPermutation(taccat) - ', palPermutation('taccat'));
