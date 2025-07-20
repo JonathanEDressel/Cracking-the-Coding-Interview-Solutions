@@ -1,4 +1,18 @@
 
+//HELPER FUNCTIONS
+
+var sortString = function (str) {
+    return str.split('').sort().join('');
+}
+
+var setChartAt = function(str, i, c) {
+    if (i < 0 || i >= str.length) 
+        return str;
+    var s = str.split('');
+    s[i] = c;
+    return s.join('');
+}
+
 // Problem 1.1 - Is Unique
 // Space Complexity - O(1)
 // Time Complexity - O(n)... maybe O(1)
@@ -20,7 +34,7 @@ var uniqueCharacters = function (input) {
 // Time Complexity - O(n log n + n) => O(n log n);
 //assume we cannot use additional data structures
 var uniqueCharacters2 = function (input) {
-    input = input.split('').sort().join('');
+    input = sortString(input);
     for(var i = 0; i < input.length - 1; i++) {
         var j = i + 1;
         if(input[i] === input[j])
@@ -57,8 +71,8 @@ var checkPermutation = function(str1, str2) {
 var checkPermutation2 = function(str1, str2) {
     if (str1.length !== str2.length)
         return false;
-    str1 = str1.split('').sort().join('');
-    str2 = str2.split('').sort().join('');
+    str1 = sortString(str1);
+    str2 = sortString(str2);
     return str1 === str2;
 }
 // console.log('checkPermutation(listen, netsil) - ', checkPermutation('listen', 'netsil'))
@@ -69,14 +83,6 @@ var checkPermutation2 = function(str1, str2) {
 //Probelm 1.3 - URLify
 // Space Compelxity - ??
 // Time Complexity - O(n^2)
-var setChartAt = function(str, i, c) {
-    if (i < 0 || i >= str.length) 
-        return str;
-    var s = str.split('');
-    s[i] = c;
-    return s.join('');
-}
-
 var URLify = function(s) {
     var input = s;  
     var L = 0, R = input.length - 1;
@@ -113,8 +119,27 @@ var palPermutation = function(s) {
         //determine if each is a palindrome
 };
 
-//Problem 1.5
+// Problem 1.5
+// Space Complextity - O(1)
+// Time Complexity - O(n^2)
+// use a brute-force method
+var oneAway = function(str1, str2) {
+    var count = 0;
+    for(var i = 0; i < str1.length; i++) {
+        if(!str2.includes(str1[i]))
+            count++;
+    }
+    return count < 2;
+}
 
+// form a more time complex friendly approach
+var oneAway2 = function(str1, str2) {
+}
+
+console.log('pale, ple -', oneAway2('pale', 'ple'))
+console.log('pales, pale -', oneAway2('pale', 'pale'))
+console.log('pale, bale -', oneAway2('pale', 'bale'))
+console.log('pale, bake -', oneAway2('pale', 'bake'))
 
 
 
