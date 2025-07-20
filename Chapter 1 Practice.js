@@ -67,10 +67,14 @@ var checkPermutation2 = function(str1, str2) {
 // console.log('checkPermutation(jon, ben) - ', checkPermutation2('jon', 'ben'))
 
 //Probelm 1.3 - URLify
+// Space Compelxity - ??
+// Time Complexity - O(n^2)
 var setChartAt = function(str, i, c) {
     if (i < 0 || i >= str.length) 
         return str;
-    return str.substring(0, i) + c + str.substring(i + 1);
+    var s = str.split('');
+    s[i] = c;
+    return s.join('');
 }
 
 var URLify = function(s) {
@@ -81,28 +85,23 @@ var URLify = function(s) {
             break;
         }
     }
-    while (R >= 0) {
+    while (R >= 0) { //O(n)
         if (input[L] !== ' ') {
-            setChartAt(input, R, input[L]);
-            // input[R] = input[L];
+            input = setChartAt(input, R, input[L]); //O(m)
             R--; L--;
         }
         else {
-            setChartAt(input, R, '0');
-            // input[R] = '0'; 
-            setChartAt(input, R-1, '2');
-            // input[R] = '2';
-            setChartAt(input, R-2, '%');
-            // input[R] = '%'; 
+            input = setChartAt(input, R, '0');
+            input = setChartAt(input, R-1, '2');
+            input = setChartAt(input, R-2, '%');
             R -= 3;
             L--;
         }
     }
     return input;
 };
-//'Mr John Smith    '
 // console.log('URLify(My John Smith   ) -', URLify('Mr John Smith    ') + '/') //=> Mr%20John%20Smith
-// console.log('URLify(Jane Doe) -', URLify('Jane Doe'))
+// console.log('URLify(Jane Doe) -', URLify('Jane Doe  '))
 // console.log('URLify(   ) -', URLify('   '))
 // console.log('URLify( Jane) -', URLify(' Jane'))
 // console.log('URLify(Jane ) -', URLify('Jane '))
