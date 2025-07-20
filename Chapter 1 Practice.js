@@ -142,9 +142,8 @@ var palPermutation = function(s) {
 
 // Problem 1.5
 // Space Complextity - O(1)
-// Time Complexity - O(n^2)
+// Time Complexity - O(n)
 // use a brute-force method
-
 var checkReplace = function(s1, s2) {
     var found = false;
     for(var i = 0; i < s1.length; i++) {
@@ -155,7 +154,6 @@ var checkReplace = function(s1, s2) {
     }
     return true;
 }
-
 var checkInsertRemove = function(s1, s2) {
     var i1 = 0, i2 = 0;
     while(i1 < s1.length && i2 < s2.length) {
@@ -171,7 +169,6 @@ var checkInsertRemove = function(s1, s2) {
     }
     return true;
 }
-
 var oneAway = function(str1, str2) {
     if(str1.length === str2.length) {
         return checkReplace(str1, str2);
@@ -183,10 +180,6 @@ var oneAway = function(str1, str2) {
         return checkInsertRemove(str2, str1);
     }
     return false;
-}
-
-// form a more time complex friendly approach
-var oneAway2 = function(str1, str2) {
 }
 
 console.log('pale, ple -', oneAway('pale', 'ple'))
