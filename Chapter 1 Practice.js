@@ -125,8 +125,10 @@ var palPermutation = function(s) {
 // use a brute-force method
 var oneAway = function(str1, str2) {
     var count = 0;
-    for(var i = 0; i < str1.length; i++) {
-        if(!str2.includes(str1[i]))
+    var longer = str1.length > str2.length ? str1 : str2;
+    var smaller = str1.length > str2.length ? str2 : str1;
+    for(var i = 0; i < longer.length; i++) {
+        if(!smaller.includes(longer[i]))
             count++;
     }
     return count < 2;
@@ -136,10 +138,10 @@ var oneAway = function(str1, str2) {
 var oneAway2 = function(str1, str2) {
 }
 
-console.log('pale, ple -', oneAway2('pale', 'ple'))
-console.log('pales, pale -', oneAway2('pale', 'pale'))
-console.log('pale, bale -', oneAway2('pale', 'bale'))
-console.log('pale, bake -', oneAway2('pale', 'bake'))
+console.log('pale, ple -', oneAway('pale', 'ple'))
+console.log('pales, pale -', oneAway('pale', 'pale'))
+console.log('pale, bale -', oneAway('pale', 'bale'))
+console.log('pale, bake -', oneAway('pale', 'bake'))
 
 
 
