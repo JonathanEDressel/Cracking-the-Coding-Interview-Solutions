@@ -113,11 +113,35 @@ var URLify = function(s) {
 // console.log('URLify(Jane ) -', URLify('Jane '))
 
 //Problem 1.4 - Palindrome Permutation
+// Space Complexity - ??
+// Time Complexity - O(n)
 var palPermutation = function(s) {
-
-    //break down each string
-        //determine if each is a palindrome
+    //assume no whitespace
+    //if odd length, one letter can have one count
+    //if even length, no letters can have just one count
+    var isEven = s.length % 2 === 0;
+    var hasOdd = false;
+    var track = {};
+    //map characters to table
+    for(var i = 0; i < s.length; i++) {
+        if (s[i] in track)
+            track[s[i]] += 1;
+        else
+            track[s[i]] = 1;
+    }
+    for (var k in track) {
+        if((isEven && track[k] % 2 === 1) || (track[k] % 2 == 1 && hasOdd))
+            return false;
+        else if (track[k] % 2 === 1)
+            hasOdd = true;
+    }
+    return true;
 };
+// console.log('palPermutation(tacocat) - ', palPermutation('tacocat'));
+// console.log('palPermutation(taccat) - ', palPermutation('taccat'));
+// console.log('palPermutation(tac) - ', palPermutation('tac'));
+// console.log('palPermutation(tactc) - ', palPermutation('tactc'));
+// console.log('palPermutation(tacca) - ', palPermutation('tacca'));
 
 // Problem 1.5
 // Space Complextity - O(1)
@@ -138,11 +162,10 @@ var oneAway = function(str1, str2) {
 var oneAway2 = function(str1, str2) {
 }
 
-console.log('pale, ple -', oneAway('pale', 'ple'))
-console.log('pales, pale -', oneAway('pale', 'pale'))
-console.log('pale, bale -', oneAway('pale', 'bale'))
-console.log('pale, bake -', oneAway('pale', 'bake'))
-
+// console.log('pale, ple -', oneAway('pale', 'ple'))
+// console.log('pales, pale -', oneAway('pale', 'pale'))
+// console.log('pale, bale -', oneAway('pale', 'bale'))
+// console.log('pale, bake -', oneAway('pale', 'bake'))
 
 
 //Problem 1.6
