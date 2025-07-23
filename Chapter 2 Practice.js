@@ -68,7 +68,6 @@ class LinkedList {
     removeDuplicates2() {
         var curr = this.head.next;
         var check = this.head.next;
-
         while(curr.next) {
             if(!check) {
                 curr = curr.next;
@@ -78,7 +77,6 @@ class LinkedList {
                 check = check.next;
                 continue;
             }
-
             if(check.val == curr.val) {
                 curr = curr.next;
                 this.deleteValue(check.val);
@@ -86,8 +84,24 @@ class LinkedList {
             else
                 check = check.next;
         }
-
         return this.size;
+    }
+
+    // Problem 2.2
+    // Time Complexity - O(n)
+    // Space Complexity - O(1)
+    findKthIndex(idx) {
+        if(idx > this.size || idx < 0)
+            return -1;
+        var curr = this.head.next;
+        var count = this.size;
+        return this.findIdx(curr, idx, count)
+    }
+
+    findIdx(node, idx, count) {
+        if(!node.next || idx === count)
+            return node.val;
+        return this.findIdx(node.next, idx, count-1);
     }
 
     printNodes() {
@@ -102,17 +116,24 @@ class LinkedList {
 }
 
 var node = new LinkedList();
-node.appendNode(50);
-node.appendNode(50);
-node.appendNode(50);
-node.appendNode(50);
-node.appendNode(50);
+node.appendNode(1);
 node.appendNode(5);
-node.appendNode(5);
-node.appendNode(4);
+node.appendNode(10);
+node.appendNode(15);
 node.appendNode(20);
-node.appendNode(20);
+node.appendNode(25);
+node.appendNode(30);
+node.appendNode(35);
+node.appendNode(40);
+node.appendNode(45);
 node.printNodes();
 
+console.log('findKthIndex(0) - ', node.findKthIndex(0));
+console.log('findKthIndex(1) - ', node.findKthIndex(1));
+console.log('findKthIndex(2) - ', node.findKthIndex(2));
+console.log('findKthIndex(5) - ', node.findKthIndex(5));
+console.log('findKthIndex(500) - ', node.findKthIndex(500));
+console.log('findKthIndex(-2) - ', node.findKthIndex(-2));
+console.log('findKthIndex(node.size) - ', node.findKthIndex(node.size));
 console.log('removeDuplicates: ' + node.removeDuplicates2());
 node.printNodes();
